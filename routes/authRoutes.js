@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login } = require('../controllers/authController');
+const { register, login, updateUser } = require('../controllers/authController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 
@@ -12,5 +12,8 @@ router.post('/login', login);
 router.get('/protected', authMiddleware, (req, res) => {
     res.status(200).json({ mensaje: 'Accediste a una ruta protegida', user: req.user });
   });
+
+// Ruta protegida para actualizar datos del usuario
+router.put('/update', authMiddleware, updateUser);
 
 module.exports = router;
